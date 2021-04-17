@@ -1,0 +1,40 @@
+.container {
+    padding-top: 75px;;
+}
+.form-horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+fieldset {
+    width: 100%;
+}
+
+.alert {
+    margin-left: 100px;;
+    width: 50%;
+    border: 2px solid #222;
+    background-color: rgb(224, 45, 45);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.alert > h2 {
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.alert > p {
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.btn {
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 5px;
+}
