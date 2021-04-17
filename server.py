@@ -21,6 +21,9 @@ def add_email():
                 "email":request.form['email']
             }
             email_addresses = connectToMySQL('email-validation').query_db(query, data)
+            if email_addresses is False:
+                flash("Email already exists!")
+                return redirect('/')
             return redirect("/display")
     else:
         return render_template("index.html")
@@ -31,6 +34,16 @@ def display():
         email_addresses = connectToMySQL('email-validation').query_db(query)
         flash(f"The email address you entered {email_addresses[0]['email']} is valid!")
         return render_template("display.html", email_addresses=email_addresses)
+
+@app.route('/delete_email/<int:id>', methods=["GET"])
+def delete_user(id):
+    query = "DELETE FROM email_addresses WHERE id = %(id)s;"
+    data = {
+        'id':id
+    }
+
+    email_addresses = connectToMySQL('email-validation').query_db(query, data)
+    return redirect("/")
 
 
 if __name__ == "__main__":

@@ -5,36 +5,40 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/display.css') }}">
 </head>
 <body>
     <div class="container">
         {% with messages = get_flashed_messages() %}
-			{% if messages %}
-				<div class="alert">
-					{%for message in messages %}
-						<p> {{message}}</p>
-					{% endfor %}
-				</div>
-			{% endif %}
-		{% endwith %}
-        <div class="row">
-            <div class="col-md-8">
-              <div class="page-header">
-                <h2><small class="pull-right">Date Created:</small> Email Address Entered:</h2>
-              </div> 
-              {% for email in email_addresses%}
-               <div class="comments-list">
-                   <div class="media">
-                        <p class="pull-right"><small>{{email['created_at'].strftime('%m/%d/%y at %H:%M %p')}}</small></p>
-                        <div class="media-body">
-                            <h4 class="media-heading user_name">{{email['email']}}</h4>
-                        </div>
-                    </div>
-               </div>
-               {% endfor %}
+        {% if messages %}
+            <div class="alert">
+                {%for message in messages %}
+                    <p> {{message}}</p>
+                {% endfor %}
             </div>
+        {% endif %}
+        {% endwith %}
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th class="text-left">Email Address:</th>
+                <th class="text-left">Created On:</th>
+                <th class="text-right">Action:</th>
+            </tr>
+        </thead>
+            {% for email in email_addresses%}
+            <tr>
+                <td class="text-left">{{email['email']}}</td>
+                <td class="text-left">{{email['created_at']}}</td>
+                <td class="text-right"><a class='btn btn-danger btn-xs' action="delete_email" name="{{email['id']}}"></span> Del</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        <div>
+            <p class="homeLink"><a href="/">HOME</a></p> 
         </div>
     </div>
 </body>
